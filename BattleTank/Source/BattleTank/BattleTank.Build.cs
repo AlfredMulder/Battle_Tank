@@ -4,8 +4,10 @@ using UnrealBuildTool;
 
 public class BattleTank : ModuleRules
 {
-	public BattleTank(ReadOnlyTargetRules Target) : base(Target)
-	{
+	public BattleTank(ReadOnlyTargetRules target) : base(target)
+    {
+        bEnforceIWYU = false;
+
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
