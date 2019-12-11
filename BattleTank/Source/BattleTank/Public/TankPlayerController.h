@@ -19,5 +19,27 @@ public:
 	auto GetControlledTank() const -> ATank*;
 
 	auto BeginPlay() -> void override;
+
+	auto Tick(float DeltaTime) -> void override;
+
+private:
+	// Start the tank moving the barrel so that a shot would hit where
+	// the crosshair intersects the world
+	auto AimTowardsCrosshair() const -> void;
 	
+	auto GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const -> bool;
+
+	// Return OUT parameter, true if hit landscape
+	auto GetSightRayHitLocation(FVector& HitLocation) const -> bool;
+
+	auto GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const -> bool;
+	
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = 0.5f;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairYLocation = 0.3333f;
+
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 1000000.f;
 };
