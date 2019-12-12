@@ -43,6 +43,6 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000.f; // Sensible starting value of 1000 m/s
+	float LaunchSpeed = 40000.f; // Sensible starting value of 4000 m/s
 	
 };

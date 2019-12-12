@@ -13,5 +13,4 @@ auto UTankBarrel::Elevate(float RelativeSpeed) -> void
 	const auto RawNewElevation = RelativeRotation.Pitch + ElevationChange;
 	const auto Elevation = FMath::Clamp<float>(RawNewElevation, MinElevationDegrees, MaxElevationDegrees);
 	SetRelativeRotation(FRotator(Elevation, 0, 0));
-	
 }
