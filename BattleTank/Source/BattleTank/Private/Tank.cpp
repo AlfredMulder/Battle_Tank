@@ -22,7 +22,7 @@ auto ATank::BeginPlay() -> void
 
 auto ATank::AimAt(const FVector HitLocation) const -> void
 {
-	TankAimingComponent->AimAt(HitLocation);
+	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 auto ATank::SetBarrelReference(UStaticMeshComponent* BarrelToSet) const -> void

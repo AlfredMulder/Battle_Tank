@@ -32,5 +32,9 @@ protected:
 
 	// Called when the game starts or when spawned
 	auto BeginPlay() -> void override;
+
+private:
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float LaunchSpeed = 100000.f; // Sensible starting value of 1000 m/s
 	
 };
