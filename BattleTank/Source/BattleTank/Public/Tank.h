@@ -7,6 +7,12 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
+// Forward declaration to use UTankBarrel
+class UTankBarrel;
+
+// Forward declaration to use UTankTurret
+class UTankTurret;
+
 UCLASS()
 class BATTLETANK_API ATank final : public APawn
 {
@@ -16,17 +22,19 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	// Called every frame
-	auto Tick(float DeltaTime) -> void override;
-
 	// Called to bind functionality to input
-	auto SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) -> void override;
+	auto SetupPlayerInputComponent(class UInputComponent* InputComponent) -> void override;
 
 	auto AimAt(FVector HitLocation) const -> void;
 
+	// Method for using barrel component in BP
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet) const;
+	void SetBarrelReference(UTankBarrel* BarrelToSet) const;
 
+	// Method for using turret component in BP
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UTankTurret* TurretToSet) const;
+	
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
