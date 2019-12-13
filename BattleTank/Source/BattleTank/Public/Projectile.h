@@ -10,8 +10,8 @@ UCLASS()
 class BATTLETANK_API AProjectile : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AProjectile();
 
@@ -19,8 +19,7 @@ protected:
 	// Called when the game starts or when spawned
 	void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	void Tick(float DeltaTime) override;
-
 };

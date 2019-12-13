@@ -18,13 +18,13 @@ class BATTLETANK_API UTankAimingComponent final : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
 	// TODO add SetTurretReference
 
-	auto AimAt(FVector HitLocation, float LaunchSpeed) const ->  void;
+	auto AimAt(FVector HitLocation, float LaunchSpeed) const -> void;
 
 	// Reference to BlueprintCallable method
 	auto SetBarrelReference(UTankBarrel* BarrelToSet) -> void;

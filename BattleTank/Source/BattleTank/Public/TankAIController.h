@@ -20,7 +20,7 @@ public:
 
 protected:
 	auto BeginPlay() -> void override;
-	
+
 private:
 	auto GetControlledTank() const -> ATank*;
 	auto GetPlayerTank() const -> ATank*;

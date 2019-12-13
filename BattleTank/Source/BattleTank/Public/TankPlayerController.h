@@ -26,14 +26,14 @@ private:
 	// Start the tank moving the barrel so that a shot would hit where
 	// the crosshair intersects the world
 	auto AimTowardsCrosshair() const -> void;
-	
+
 	auto GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const -> bool;
 
 	// Return OUT parameter, true if hit landscape
 	auto GetSightRayHitLocation(FVector& HitLocation) const -> bool;
 
 	auto GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const -> bool;
-	
+
 	UPROPERTY(EditAnywhere)
 	float CrosshairXLocation = 0.5f;
 
