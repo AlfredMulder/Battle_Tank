@@ -28,6 +28,12 @@ auto ATank::SetTurretReference(UTankTurret* TurretToSet) const -> void
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 
+void ATank::Fire()
+{
+	auto const Time = GetWorld()->TimeSeconds;
+	UE_LOG(LogTemp, Warning, TEXT("%f: Tank Fires"), Time);
+}
+
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {

@@ -34,6 +34,9 @@ public:
 	// Method for using turret component in BP
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet) const;
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
 	
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
@@ -43,6 +46,6 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 40000.f; // Sensible starting value of 4000 m/s
+	float LaunchSpeed = 4000; // Sensible starting value of 4000 m/s
 	
 };
