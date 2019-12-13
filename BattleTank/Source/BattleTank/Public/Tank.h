@@ -13,6 +13,9 @@ class UTankBarrel;
 // Forward declaration to use UTankTurret
 class UTankTurret;
 
+// Forward declaration to use AProjectile
+class AProjectile;
+
 UCLASS()
 class BATTLETANK_API ATank final : public APawn
 {
@@ -29,7 +32,7 @@ public:
 
 	// Method for using barrel component in BP
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel* BarrelToSet) const;
+	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 	// Method for using turret component in BP
 	UFUNCTION(BlueprintCallable, Category = Setup)
@@ -47,4 +50,10 @@ protected:
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 4000; // Sensible starting value of 4000 m/s
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	// Local barrel reference for spawning projectile
+	UTankBarrel* Barrel = nullptr;
 };

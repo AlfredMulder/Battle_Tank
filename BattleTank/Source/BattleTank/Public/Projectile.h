@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "Projectile.generated.h"
 
 UCLASS()
-class BATTLETANK_API AProjectile : public AActor
+class BATTLETANK_API AProjectile final : public AActor
 {
 	GENERATED_BODY()
 
@@ -22,4 +23,9 @@ protected:
 public:
 	// Called every frame
 	void Tick(float DeltaTime) override;
+
+	auto LaunchProjectile(float Speed) -> void;
+	
+private:
+	UProjectileMovementComponent* ProjectileMovement = nullptr;
 };

@@ -3,6 +3,7 @@
 
 #include "BattleTank.h"
 #include "TankBarrel.h"
+#include "Projectile.h"
 #include "TankTurret.h"
 #include "TankAimingComponent.h"
 #include "Tank.h"
@@ -14,13 +15,15 @@ ATank::ATank()
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	// Adding UTankAimingComponent manually in Tank_BP
 	// No need to protect points as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 }
 
-auto ATank::SetBarrelReference(UTankBarrel* BarrelToSet) const -> void
+auto ATank::SetBarrelReference(UTankBarrel* BarrelToSet) -> void
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+	Barrel = BarrelToSet;
 }
 
 auto ATank::SetTurretReference(UTankTurret* TurretToSet) const -> void
@@ -30,8 +33,15 @@ auto ATank::SetTurretReference(UTankTurret* TurretToSet) const -> void
 
 void ATank::Fire()
 {
-	auto const Time = GetWorld()->TimeSeconds;
-	UE_LOG(LogTemp, Warning, TEXT("%f: Tank Fires"), Time);
+	if (!Barrel) { return; }
+	// Spawn a projectile at the socket location on the barrel
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+		ProjectileBlueprint,
+		Barrel->GetSocketLocation(FName("Projectile")),
+		Barrel->GetSocketRotation(FName("Projectile"))
+		);
+
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
 
 // Called when the game starts or when spawned
