@@ -26,7 +26,7 @@ void AProjectile::Tick(const float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-auto AProjectile::LaunchProjectile(const float Speed) -> void
+auto AProjectile::LaunchProjectile(const float Speed) const -> void
 {
 	auto const Time = GetWorld()->GetTimeSeconds();
 	UE_LOG(LogTemp, Warning, TEXT("%f: Projectile Fires at %f"), Time, Speed);

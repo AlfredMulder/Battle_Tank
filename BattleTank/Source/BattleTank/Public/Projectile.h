@@ -24,8 +24,8 @@ public:
 	// Called every frame
 	void Tick(float DeltaTime) override;
 
-	auto LaunchProjectile(float Speed) -> void;
-	
+	auto LaunchProjectile(float Speed) const -> void;
+
 private:
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
 };
