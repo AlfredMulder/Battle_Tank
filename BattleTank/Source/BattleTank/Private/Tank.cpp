@@ -19,8 +19,6 @@ ATank::ATank()
 	// Adding UTankAimingComponent manually in Tank_BP
 	// No need to protect points as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
-
-	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
 }
 
 auto ATank::SetBarrelReference(UTankBarrel* BarrelToSet) -> void
