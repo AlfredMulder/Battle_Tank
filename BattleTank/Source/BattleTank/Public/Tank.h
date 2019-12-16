@@ -2,19 +2,15 @@
 
 #pragma once
 
-#include "TankAimingComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
-// Forward declaration to use UTankBarrel
+// Forward declarations
 class UTankBarrel;
-
-// Forward declaration to use UTankTurret
-class UTankTurret;
-
-// Forward declaration to use AProjectile
 class AProjectile;
+class UTankMovementComponent;
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLETANK_API ATank final : public APawn
@@ -43,6 +39,9 @@ public:
 
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
 
 	// Called when the game starts or when spawned
 	auto BeginPlay() -> void override;
