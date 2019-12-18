@@ -17,10 +17,11 @@ auto UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	const auto AIForwardIntention = MoveVelocity.GetSafeNormal();
 
 	const auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
-
 	IntendMoveForward(ForwardThrow);
 	
-	// UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *MoveVelocityString);
+	const auto RightThrow= FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+	IntendTurnRight(RightThrow);
+	
 }
 
 auto UTankMovementComponent::IntendMoveForward(const float Throw) const -> void
