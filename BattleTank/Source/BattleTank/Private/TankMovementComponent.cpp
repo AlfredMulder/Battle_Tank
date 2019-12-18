@@ -1,8 +1,6 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
+#include "BattleTank.h"
 #include "TankTrack.h"
 #include "TankMovementComponent.h"
-
 
 auto UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet) -> void
 {
@@ -12,16 +10,16 @@ auto UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* 
 
 auto UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) -> void
 {
-	// No need to use Super
+	// No need to call Super as we're replacing the functionality
+
 	const auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	const auto AIForwardIntention = MoveVelocity.GetSafeNormal();
 
 	const auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
 	IntendMoveForward(ForwardThrow);
-	
-	const auto RightThrow= FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+
+	const auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
 	IntendTurnRight(RightThrow);
-	
 }
 
 auto UTankMovementComponent::IntendMoveForward(const float Throw) const -> void

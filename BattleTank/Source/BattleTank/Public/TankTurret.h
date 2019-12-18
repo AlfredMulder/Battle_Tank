@@ -19,6 +19,6 @@ public:
 	auto Rotate(float RelativeSpeed) -> void;
 
 private:
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float MaxDegreesPerSecond = 25; // Sensible Default
 };

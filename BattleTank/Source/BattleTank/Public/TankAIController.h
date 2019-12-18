@@ -19,8 +19,6 @@ public:
 	
 	auto Tick(float DeltaTime) -> void override;
 
-protected:
-	
 	auto BeginPlay() -> void override;
 
 private:
