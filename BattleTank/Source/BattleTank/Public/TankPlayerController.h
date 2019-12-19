@@ -16,7 +16,8 @@ class BATTLETANK_API ATankPlayerController final : public APlayerController
 	GENERATED_BODY()
 
 public:
-	auto GetControlledTank() const -> ATank*;
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	ATank* GetControlledTank() const;
 
 	auto BeginPlay() -> void override;
 
