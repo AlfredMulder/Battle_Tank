@@ -16,7 +16,7 @@ class BATTLETANK_API ATankAIController final : public AAIController
 	GENERATED_BODY()
 
 public:
-	
+
 	auto Tick(float DeltaTime) -> void override;
 
 	auto BeginPlay() -> void override;

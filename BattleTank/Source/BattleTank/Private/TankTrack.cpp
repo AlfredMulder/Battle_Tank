@@ -8,5 +8,5 @@ auto UTankTrack::SetThrottle(const float Throttle) const -> void
 	const auto ForceApplied = GetForwardVector() * Throttle * TrackMaxDrivingForce;
 	const auto ForceLocation = GetComponentLocation();
 	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
-	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);	
+	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
 }
