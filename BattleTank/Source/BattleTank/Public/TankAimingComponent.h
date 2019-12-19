@@ -10,12 +10,12 @@
 UENUM()
 enum class EFiringState : uint8
 {
-	Locked,
+	Reloading,
 	Aiming,
-	Reloading
+	Locked
 };
 
-// Forward declarations
+// Forward Declaration
 class UTankBarrel;
 class UTankTurret;
 
@@ -25,7 +25,7 @@ class BATTLETANK_API UTankAimingComponent final : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:
+public:	
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
@@ -33,16 +33,13 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringState FiringState = EFiringState::Aiming;
+	EFiringState FiringState = EFiringState::Locked;
 
 private:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
-	// Explicit pointer on Barrel object
 	UTankBarrel* Barrel = nullptr;
-
-	// Explicit pointer on Turret object
 	UTankTurret* Turret = nullptr;
 
 	auto MoveBarrelTowards(FVector AimDirection) const -> void;

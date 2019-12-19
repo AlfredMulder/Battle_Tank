@@ -13,9 +13,9 @@ auto ATankAIController::BeginPlay() -> void
 }
 
 // Called every frame
-auto ATankAIController::Tick(const float DeltaTime) -> void
+auto ATankAIController::Tick(const float DeltaSeconds) -> void
 {
-	Super::Tick(DeltaTime);
+	Super::Tick(DeltaSeconds);
 
 	const auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	auto ControlledTank = Cast<ATank>(GetPawn());
