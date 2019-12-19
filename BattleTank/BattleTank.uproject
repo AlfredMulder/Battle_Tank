@@ -1,23 +1,23 @@
 {
-	"FileVersion": 3,
-	"EngineAssociation": "4.24",
-	"Category": "",
-	"Description": "",
-	"Modules": [
-		{
-			"Name": "BattleTank",
-			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine",
-				"AIModule"
-			]
-		}
-	],
-	"Plugins": [
-		{
-			"Name": "FMODStudio",
-			"Enabled": false
-		}
-	]
+  "FileVersion": 3,
+  "EngineAssociation": "4.24",
+  "Category": "",
+  "Description": "",
+  "Modules": [
+    {
+      "Name": "BattleTank",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "AdditionalDependencies": [
+        "Engine",
+        "AIModule"
+      ]
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "FMODStudio",
+      "Enabled": false
+    }
+  ]
 }
