@@ -24,14 +24,14 @@ auto UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
 auto UTankMovementComponent::IntendMoveForward(const float Throw) const -> void
 {
-	if (!LeftTrack || !RightTrack) { return; }
+	if (!ensure(LeftTrack && RightTrack)) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 }
 
 auto UTankMovementComponent::IntendTurnRight(const float Throw) const -> void
 {
-	if (!LeftTrack || !RightTrack) { return; }
+	if (!ensure(LeftTrack && RightTrack)) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
 }

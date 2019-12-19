@@ -24,7 +24,7 @@ void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* Tur
 
 auto UTankAimingComponent::AimAt(const FVector HitLocation, const float LaunchSpeed) const -> void
 {
-	if (!Barrel) { return; }
+	if (!ensure(Barrel)) { return; }
 
 	FVector OutLaunchVelocity;
 	const auto StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
@@ -42,7 +42,7 @@ auto UTankAimingComponent::AimAt(const FVector HitLocation, const float LaunchSp
 		// TODO report bug
 	);
 
-	if (bHaveAimSolution)
+	if (ensure(bHaveAimSolution))
 	{
 		const auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
@@ -53,7 +53,7 @@ auto UTankAimingComponent::AimAt(const FVector HitLocation, const float LaunchSp
 
 auto UTankAimingComponent::MoveBarrelTowards(const FVector AimDirection) const -> void
 {
-	if (!Barrel || !Turret) { return; }
+	if (ensure(Barrel) || ensure(Turret)) { return; }
 	// Work-out difference between current barrel rotation, and AimDirection
 	const auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	const auto AimAsRotator = AimDirection.Rotation();
