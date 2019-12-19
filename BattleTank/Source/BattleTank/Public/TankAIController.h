@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
-#include "Tank.h"
 #include "TankAIController.generated.h"
 
 /**
@@ -14,12 +13,13 @@ UCLASS()
 class BATTLETANK_API ATankAIController final : public AAIController
 {
 	GENERATED_BODY()
+
+public:
+	auto BeginPlay() -> void override;
+
+	auto Tick(float DeltaSeconds) -> void override;
 	
 private:
-	virtual auto BeginPlay() -> void override;
-
-	virtual auto Tick(float DeltaSeconds) -> void override;
-	
 	// How close can the AI tank get
 	float AcceptanceRadius = 3000;
 };

@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "BattleTank.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
 #include "Engine.h"
+#include "Projectile.h"
 #include "TankAimingComponent.h"
 
 // Sets default values for this component's properties
@@ -22,7 +22,7 @@ auto UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* Tur
 	Turret = TurretToSet;
 }
 
-auto UTankAimingComponent::AimAt(const FVector HitLocation, const float LaunchSpeed) const -> void
+auto UTankAimingComponent::AimAt(const FVector HitLocation) const -> void
 {
 	if (!ensure(Barrel)) { return; }
 
@@ -60,4 +60,24 @@ auto UTankAimingComponent::MoveBarrelTowards(const FVector AimDirection) const -
 
 	Barrel->Elevate(DeltaRotator.Pitch);
 	Turret->Rotate(DeltaRotator.Yaw);
+}
+
+
+auto UTankAimingComponent::Fire() -> void
+{
+	if (!ensure(Barrel && ProjectileBlueprint)) { return; }
+	const auto bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+
+	if (bIsReloaded)
+	{
+		// Spawn a projectile at the socket location on the barrel
+		const auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+			ProjectileBlueprint,
+			Barrel->GetSocketLocation(FName("Projectile")),
+			Barrel->GetSocketRotation(FName("Projectile"))
+			);
+
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }

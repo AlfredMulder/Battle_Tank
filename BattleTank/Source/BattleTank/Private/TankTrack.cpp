@@ -1,6 +1,4 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "TankTrack.h"
 
 auto UTankTrack::SetThrottle(const float Throttle) const -> void

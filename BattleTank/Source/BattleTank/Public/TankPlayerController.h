@@ -2,13 +2,11 @@
 
 #pragma once
 
-#include "Tank.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
 // Forward declarations.
-class ATank;
 class UTankTankAimingComponent;
 
 /**
@@ -20,16 +18,13 @@ class BATTLETANK_API ATankPlayerController final : public APlayerController
 	GENERATED_BODY()
 
 protected:
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank* GetControlledTank() const;
-
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
 private:
-	virtual auto BeginPlay() -> void override;
+	auto BeginPlay() -> void override;
 
-	virtual auto Tick(float DeltaTime) -> void override;
+	auto Tick(float DeltaTime) -> void override;
 
 	// Start the tank moving the barrel so that a shot would hit where
 	// the crosshair intersects the world

@@ -1,4 +1,3 @@
-#include "BattleTank.h"
 #include "Projectile.h"
 
 

@@ -17,10 +17,10 @@ public:
 	AProjectile();
 
 	// Called when the game starts or when spawned
-	virtual auto BeginPlay() -> void override;
+	auto BeginPlay() -> void override;
 	
 	// Called every frame
-	virtual auto Tick(float DeltaSeconds) -> void override;
+	auto Tick(float DeltaSeconds) -> void override;
 
 	auto LaunchProjectile(float Speed) const -> void;
 
