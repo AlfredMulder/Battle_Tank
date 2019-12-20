@@ -18,10 +18,10 @@ public:
 	void Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void IntendMoveForward(float Throw);
+	void IntendMoveForward(float Throw) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void IntendTurnRight(float Throw);
+	void IntendTurnRight(float Throw) const;
 
 private:
 	// Called from the path-finding logic by the AI controllers
