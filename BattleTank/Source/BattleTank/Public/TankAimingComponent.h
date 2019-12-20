@@ -13,7 +13,8 @@ enum class EFiringState : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
 
 // Forward Declaration
@@ -27,27 +28,30 @@ class BATTLETANK_API UTankAimingComponent final : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+public:
+	UTankAimingComponent();
 
-	UFUNCTION(BlueprintCallable, Category = "Firing")
-	void Fire();
-
+	auto TickComponent(float DeltaTime, enum ELevelTick TickType,
+	                           FActorComponentTickFunction* ThisTickFunction) -> void override;
+	
 	auto AimAt(FVector HitLocation) -> void;
 
 	auto GetFiringState() const -> EFiringState;
+	
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	void Fire();
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int GetRoundLeft() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState FiringState = EFiringState::Reloading;
 
 private:
-	// Sets default values for this component's properties
-	UTankAimingComponent();
-
-	auto TickComponent(float DeltaTime, enum ELevelTick TickType,
-	                           FActorComponentTickFunction* ThisTickFunction) -> void override;
 
 	auto BIsBarrelMoving() const -> bool;
 	
@@ -71,4 +75,6 @@ private:
 	double LastFireTime = 0;
 
 	FVector AimDirection;
+
+	int RoundsLeft = 3;
 };
