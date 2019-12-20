@@ -19,7 +19,7 @@ UTankAimingComponent::UTankAimingComponent()
 auto UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	FActorComponentTickFunction* ThisTickFunction) -> void
 {
-	if (ensure((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds))
+	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
 	{
 		FiringState = EFiringState::Reloading;
 	}

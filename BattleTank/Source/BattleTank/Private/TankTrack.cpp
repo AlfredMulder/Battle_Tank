@@ -7,17 +7,28 @@ UTankTrack::UTankTrack()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
+auto UTankTrack::BeginPlay() -> void
+{
+	Super::BeginPlay();
+	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
+}
+
+auto UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit) -> void
+{
+	UE_LOG(LogTemp, Warning, TEXT("I'm hit, I'm hit!"))
+}
+
 auto UTankTrack::TickComponent(const float DeltaTime, ELevelTick TickType,
                                FActorComponentTickFunction* ThisTickFunction) -> void
 {
-	auto SlippageSpeed = FVector::DotProduct(GetRightVector(), GetComponentVelocity());
+	const auto SlippageSpeed = FVector::DotProduct(GetRightVector(), GetComponentVelocity());
 
 	// Work-out the required acceleration this frame to correct
-	auto CorrectionAcceleration = -SlippageSpeed / DeltaTime * GetRightVector();
+	const auto CorrectionAcceleration = -SlippageSpeed / DeltaTime * GetRightVector();
 
 	// Calculate and apply sideways (F = m a)
 	auto TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
-	auto CorrectionForce = (TankRoot->GetMass() * CorrectionAcceleration) / 2; // Two tracks
+	const auto CorrectionForce = (TankRoot->GetMass() * CorrectionAcceleration) / 2; // Two tracks
 	TankRoot->AddForce(CorrectionForce);
 }
 

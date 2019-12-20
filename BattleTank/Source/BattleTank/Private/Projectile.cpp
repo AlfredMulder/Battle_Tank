@@ -15,13 +15,12 @@ AProjectile::AProjectile()
 auto AProjectile::BeginPlay() -> void
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
-auto AProjectile::Tick(const float DeltaTime) -> void
+auto AProjectile::Tick(const float DeltaSeconds) -> void
 {
-	Super::Tick( DeltaTime );
+	Super::Tick( DeltaSeconds );
 
 }
 
