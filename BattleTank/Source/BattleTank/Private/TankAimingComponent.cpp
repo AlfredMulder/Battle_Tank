@@ -33,6 +33,11 @@ auto UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	}
 }
 
+auto UTankAimingComponent::GetFiringState() const -> EFiringState
+{
+	return FiringState;
+}
+
 auto UTankAimingComponent::BIsBarrelMoving() const -> bool
 {
 	if (!ensure(Barrel)) { return false; }
