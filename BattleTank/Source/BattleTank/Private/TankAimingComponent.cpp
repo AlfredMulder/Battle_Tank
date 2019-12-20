@@ -11,9 +11,39 @@ UTankAimingComponent::UTankAimingComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = false;
+	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
+}
+
+auto UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType,
+	FActorComponentTickFunction* ThisTickFunction) -> void
+{
+	if (ensure((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds))
+	{
+		FiringState = EFiringState::Reloading;
+	}
+	else if (BIsBarrelMoving())
+	{
+		FiringState = EFiringState::Aiming;
+	}
+	else
+	{
+		FiringState = EFiringState::Locked;
+	}
+}
+
+auto UTankAimingComponent::BIsBarrelMoving() const -> bool
+{
+	if (!ensure(Barrel)) { return false; }
+	const auto BarrelForward = Barrel->GetForwardVector();
+	return !BarrelForward.Equals(AimDirection, 0.01);
+}
+
+auto UTankAimingComponent::BeginPlay() -> void
+{
+	// So that first is after initial reload
+	LastFireTime = FPlatformTime::Seconds();
 }
 
 auto UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet) -> void
@@ -22,7 +52,7 @@ auto UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* Tur
 	Turret = TurretToSet;
 }
 
-auto UTankAimingComponent::AimAt(const FVector HitLocation) const -> void
+auto UTankAimingComponent::AimAt(const FVector HitLocation) -> void
 {
 	if (!ensure(Barrel)) { return; }
 
@@ -43,7 +73,7 @@ auto UTankAimingComponent::AimAt(const FVector HitLocation) const -> void
 
 	if (bHaveAimSolution)
 	{
-		const auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+		AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
 	}
 	// If no solution found do nothing
@@ -65,12 +95,11 @@ auto UTankAimingComponent::MoveBarrelTowards(const FVector AimDirection) const -
 
 auto UTankAimingComponent::Fire() -> void
 {
-	if (!ensure(Barrel && ProjectileBlueprint)) { return; }
-	const auto bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-
-	if (bIsReloaded)
+	if (FiringState != EFiringState::Reloading)
 	{
 		// Spawn a projectile at the socket location on the barrel
+		if (!ensure(Barrel)) { return; }
+		if (!ensure(ProjectileBlueprint)) { return; }
 		const auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
 			Barrel->GetSocketLocation(FName("Projectile")),
