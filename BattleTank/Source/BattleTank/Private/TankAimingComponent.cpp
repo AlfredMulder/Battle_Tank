@@ -109,7 +109,7 @@ auto UTankAimingComponent::MoveBarrelTowards(const FVector AimDirection) const -
 	{
 		Turret->Rotate(DeltaRotator.Yaw);
 	}
-	else
+	else // Avoid going the long-way round
 	{
 		Turret->Rotate(-DeltaRotator.Yaw);
 	}
