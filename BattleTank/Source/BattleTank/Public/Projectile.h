@@ -41,10 +41,13 @@ private:
 	           FVector NormalImpulse, const FHitResult& Hit);
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
-	URadialForceComponent* ExplosionForce= nullptr;
+	URadialForceComponent* ExplosionForce = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float DestroyDelay = 10.f;
 
 	void OnTimerExpire();
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float ProjectileDamage = 20.f;
 };

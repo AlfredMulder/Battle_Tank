@@ -64,7 +64,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000;
 	
-	auto MoveBarrelTowards(FVector AimDirection) const -> void;
+	auto MoveBarrelTowards(FVector FAimDirection) -> void;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
@@ -77,5 +77,5 @@ private:
 	FVector AimDirection;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	int32 RoundsLeft = 3;
+	int32 RoundsLeft = 20;
 };
