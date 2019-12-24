@@ -18,6 +18,11 @@ public:
 	// Called by the engine when actor damage is dealt
 	auto TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator,
 	                AActor* DamageCauser) -> float override;
+
+	// Return current health as a percentage of starting health, between 0 and 1
+	UFUNCTION(BlueprintPure, Category = "Health")
+	float GetHealthPercent();
+	
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	int32 StartingHealth = 100;
