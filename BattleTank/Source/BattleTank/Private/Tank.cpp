@@ -26,3 +26,9 @@ auto ATank::GetHealthPercent() -> float
 {
 	return static_cast<float>(CurrentHealth) / static_cast<float>(StartingHealth);
 }
+
+auto ATank::BeginPlay() -> void
+{
+	Super::BeginPlay();
+	CurrentHealth = StartingHealth;
+}

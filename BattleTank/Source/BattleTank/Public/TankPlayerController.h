@@ -21,7 +21,20 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
+	UFUNCTION()
+	void OnPossessedTankDeath();
+
 private:
+
+	UPROPERTY(EditDefaultsOnly)
+	float CrosshairXLocation = 0.5;
+
+	UPROPERTY(EditDefaultsOnly)
+	float CrosshairYLocation = 0.3333;
+
+	UPROPERTY(EditDefaultsOnly)
+	float LineTraceRange = 1000000;
+	
 	auto BeginPlay() -> void override;
 
 	auto Tick(float DeltaTime) -> void override;
@@ -33,15 +46,9 @@ private:
 	// Return an OUT parameter, true if hit landscape
 	auto GetSightRayHitLocation(FVector& HitLocation) const -> bool;
 
-	UPROPERTY(EditDefaultsOnly)
-	float CrosshairXLocation = 0.5;
-
-	UPROPERTY(EditDefaultsOnly)
-	float CrosshairYLocation = 0.3333;
-
-	UPROPERTY(EditDefaultsOnly)
-	float LineTraceRange = 1000000;
+	auto SetPawn(APawn* InPawn) -> void override;
 
 	auto GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const -> bool;
+	
 	auto GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const -> bool;
 };

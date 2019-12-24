@@ -18,6 +18,7 @@ auto ATankAIController::SetPawn(APawn* InPawn) -> void
 	{
 		auto PossessedTank = Cast<ATank>(InPawn);
 		if (!ensure(PossessedTank)) { return; }
+		
 		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossessedTankDeath);
 	}
 }
@@ -34,10 +35,11 @@ auto ATankAIController::Tick(const float DeltaSeconds) -> void
 	
 	// Move towards the player
 	MoveToActor(PlayerTank, AcceptanceRadius); // TODO check radius is in cm
-	const auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
-	
+
 	// Aim towards the player
+	const auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
 	AimingComponent->AimAt(PlayerTank->GetActorLocation());
+	
 	if (AimingComponent->GetFiringState() == EFiringState::Locked)
 	{
 		AimingComponent->Fire();
@@ -46,5 +48,6 @@ auto ATankAIController::Tick(const float DeltaSeconds) -> void
 
 void ATankAIController::OnPossessedTankDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Received!"));
+	if (!ensure(GetPawn())) { return; }
+	GetPawn()->DetachFromControllerPendingDestroy();
 }

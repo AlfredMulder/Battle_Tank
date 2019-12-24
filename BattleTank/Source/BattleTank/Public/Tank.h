@@ -21,16 +21,20 @@ public:
 	auto TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator,
 	                AActor* DamageCauser) -> float override;
 
+	auto BeginPlay() -> void override;
+
+	FTankDelegate OnDeath;
+
+protected:
 	// Return current health as a percentage of starting health, between 0 and 1
 	UFUNCTION(BlueprintPure, Category = "Health")
 	float GetHealthPercent();
-
-	FTankDelegate OnDeath;
 	
 private:
+	
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	int32 StartingHealth = 100;
 
 	UPROPERTY(VisibleAnywhere, Category = "Health")
-	int32 CurrentHealth = StartingHealth;
+	int32 CurrentHealth; // Initialized in BeginPlay
 };
