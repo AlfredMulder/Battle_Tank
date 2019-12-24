@@ -75,7 +75,7 @@ private:
 	
 	UTankTurret* Turret = nullptr;
 	
-	auto MoveBarrelTowards(FVector FAimDirection) -> void;
+	auto MoveBarrelTowards(FVector TargetAimDirection) -> void;
 	
 	double LastFireTime = 0;
 

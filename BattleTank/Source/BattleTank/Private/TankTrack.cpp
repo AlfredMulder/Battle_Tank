@@ -26,7 +26,7 @@ auto UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
 	CurrentThrottle = 0;
 }
 
-auto UTankTrack::ApplySidewaysForce() -> void
+auto UTankTrack::ApplySidewaysForce() const -> void
 {
 	const auto SlippageSpeed = FVector::DotProduct(GetRightVector(), GetComponentVelocity());
 
@@ -40,7 +40,7 @@ auto UTankTrack::ApplySidewaysForce() -> void
 	TankRoot->AddForce(CorrectionForce);
 }
 
-auto UTankTrack::DriveTrack() -> void
+auto UTankTrack::DriveTrack() const -> void
 {
 	const auto ForceApplied = GetForwardVector() * CurrentThrottle * TrackMaxDrivingForce;
 	const auto ForceLocation = GetComponentLocation();

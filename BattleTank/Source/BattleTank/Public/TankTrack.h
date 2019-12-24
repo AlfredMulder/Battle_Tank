@@ -28,12 +28,12 @@ private:
 
 	auto BeginPlay() -> void override;
 
-	auto ApplySidewaysForce() -> void;
+	auto ApplySidewaysForce() const -> void;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 
-	auto DriveTrack() -> void;
+	auto DriveTrack() const -> void;
 
 	float CurrentThrottle = 0;
 };

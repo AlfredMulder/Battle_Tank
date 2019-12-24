@@ -1,34 +1,34 @@
 #include "TankTrack.h"
 #include "TankMovementComponent.h"
 
-void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
+auto UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet) -> void
 {
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
 }
 
-void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+auto UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) -> void
 {
 	// No need to call Super as we're replacing the functionality
 
-	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
-	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
+	const auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+	const auto AIForwardIntention = MoveVelocity.GetSafeNormal();
 
-	auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
+	const auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
 	IntendMoveForward(ForwardThrow);
 
-	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+	const auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
 	IntendTurnRight(RightThrow);
 }
 
-auto UTankMovementComponent::IntendMoveForward(float Throw) -> void
+auto UTankMovementComponent::IntendMoveForward(const float Throw) const -> void
 {
 	if (!ensure(LeftTrack && RightTrack)) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 }
 
-auto UTankMovementComponent::IntendTurnRight(float Throw) -> void
+auto UTankMovementComponent::IntendTurnRight(const float Throw) const -> void
 {
 	if (!ensure(LeftTrack && RightTrack)) { return; }
 	LeftTrack->SetThrottle(Throw);

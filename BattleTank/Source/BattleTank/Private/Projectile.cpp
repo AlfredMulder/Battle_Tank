@@ -44,7 +44,8 @@ auto AProjectile::LaunchProjectile(const float Speed) const -> void
 	ProjectileMovement->Activate();
 }
 
-auto AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit) -> void
+auto AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, 
+	FVector NormalImpulse, const FHitResult& Hit) -> void
 {
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
