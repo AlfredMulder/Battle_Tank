@@ -25,7 +25,7 @@ public:
 
 private:
 	// Called from the path-finding logic by the AI controllers
-	virtual auto RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) -> void override;
+	auto RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) -> void override;
 
 	UTankTrack* LeftTrack = nullptr;
 	UTankTrack* RightTrack = nullptr;
