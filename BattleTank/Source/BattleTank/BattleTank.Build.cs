@@ -8,6 +8,10 @@ public class BattleTank : ModuleRules
     {
         bEnforceIWYU = false;
 
+        bLegacyPublicIncludePaths = false;
+
+        ShadowVariableWarningLevel = WarningLevel.Error;
+
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
         PublicDependencyModuleNames.AddRange(new string[] {"Core", "CoreUObject", "Engine", "InputCore"});
