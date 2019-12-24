@@ -22,6 +22,10 @@ protected:
 private:
 	auto BeginPlay() -> void override;
 
+	auto SetPawn(APawn* InPawn) -> void override;
+
 	auto Tick(float DeltaSeconds) -> void override;
-	
+
+	UFUNCTION()
+	void OnPossessedTankDeath();
 };
