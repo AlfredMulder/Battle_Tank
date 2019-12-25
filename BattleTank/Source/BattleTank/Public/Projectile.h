@@ -14,8 +14,8 @@ UCLASS()
 class BATTLETANK_API AProjectile final : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AProjectile();
 

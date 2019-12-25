@@ -9,7 +9,7 @@
 // Sets default values
 AProjectile::AProjectile()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
 	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Collision Mesh"));
@@ -44,13 +44,13 @@ auto AProjectile::LaunchProjectile(const float Speed) const -> void
 	ProjectileMovement->Activate();
 }
 
-auto AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, 
-	FVector NormalImpulse, const FHitResult& Hit) -> void
+auto AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+                        FVector NormalImpulse, const FHitResult& Hit) -> void
 {
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
 	ExplosionForce->FireImpulse();
-	
+
 	SetRootComponent(ImpactBlast);
 	CollisionMesh->DestroyComponent();
 
@@ -61,7 +61,7 @@ auto AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 		ExplosionForce->Radius, // for consistency
 		UDamageType::StaticClass(),
 		TArray<AActor*>() // damage all actors
-		);
+	);
 
 	FTimerHandle Timer;
 	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, DestroyDelay, false);

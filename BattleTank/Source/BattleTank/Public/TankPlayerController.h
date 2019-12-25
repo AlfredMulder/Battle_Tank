@@ -34,7 +34,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000;
-	
+
 	auto BeginPlay() -> void override;
 
 	auto Tick(float DeltaTime) -> void override;
@@ -49,6 +49,6 @@ private:
 	auto SetPawn(APawn* InPawn) -> void override;
 
 	auto GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const -> bool;
-	
+
 	auto GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const -> bool;
 };

@@ -13,15 +13,15 @@ auto UTankTrack::BeginPlay() -> void
 	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
 }
 
-auto UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, 
-	UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit) -> void
+auto UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
+                       UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit) -> void
 {
 	// Drive the tracks
 	DriveTrack();
-	
+
 	// Apply sideways force
 	ApplySidewaysForce();
-	
+
 	// Reset throttle
 	CurrentThrottle = 0;
 }

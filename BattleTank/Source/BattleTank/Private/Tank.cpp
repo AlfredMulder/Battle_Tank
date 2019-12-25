@@ -4,7 +4,7 @@
 // Sets default values
 ATank::ATank()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 }
 
@@ -22,7 +22,7 @@ auto ATank::TakeDamage(const float DamageAmount, FDamageEvent const& DamageEvent
 	return DamageToApply;
 }
 
-auto ATank::GetHealthPercent() -> float
+auto ATank::GetHealthPercent() const -> float
 {
 	return static_cast<float>(CurrentHealth) / static_cast<float>(StartingHealth);
 }

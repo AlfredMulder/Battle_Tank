@@ -15,7 +15,7 @@ auto ATankPlayerController::BeginPlay() -> void
 
 auto ATankPlayerController::Tick(const float DeltaTime) -> void
 {
-	Super::Tick( DeltaTime );
+	Super::Tick(DeltaTime);
 	AimTowardsCrosshair();
 }
 
@@ -27,7 +27,7 @@ auto ATankPlayerController::AimTowardsCrosshair() const -> void
 
 	FVector HitLocation; // Out parameter
 	const auto bGotHitLocation = GetSightRayHitLocation(HitLocation);
-	
+
 	if (bGotHitLocation) // Has "side-effect", is going to line trace
 	{
 		AimingComponent->AimAt(HitLocation);
@@ -49,7 +49,7 @@ auto ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const -
 		// Line-trace along that LookDirection, and see what we hit (up to max range)
 		return GetLookVectorHitLocation(LookDirection, HitLocation);
 	}
-	
+
 	return false;
 }
 
@@ -63,7 +63,7 @@ auto ATankPlayerController::GetLookVectorHitLocation(const FVector LookDirection
 			StartLocation,
 			EndLocation,
 			ECC_Camera)
-		)
+	)
 	{
 		HitLocation = HitResult.Location;
 		return true;
@@ -91,10 +91,10 @@ auto ATankPlayerController::SetPawn(APawn* InPawn) -> void
 auto ATankPlayerController::GetLookDirection(const FVector2D ScreenLocation, FVector& LookDirection) const -> bool
 {
 	FVector CameraWorldLocation; // To be discarded
-	return  DeprojectScreenPositionToWorld(
-			ScreenLocation.X,
-			ScreenLocation.Y, 
-			CameraWorldLocation,
-			LookDirection
+	return DeprojectScreenPositionToWorld(
+		ScreenLocation.X,
+		ScreenLocation.Y,
+		CameraWorldLocation,
+		LookDirection
 	);
 }

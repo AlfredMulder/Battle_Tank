@@ -9,11 +9,11 @@
 /**
  * 
  */
-UCLASS(meta = (BlueprintSpawnableComponent)) //, hidecategories = ("Collision"))
+UCLASS(meta = (BlueprintSpawnableComponent))
 class BATTLETANK_API UTankBarrel final : public UStaticMeshComponent
 {
 	GENERATED_BODY()
-	
+
 public:
 	// -1 is max downward speed, and +1 is max up movement
 	auto Elevate(float RelativeSpeed) -> void;
@@ -21,7 +21,7 @@ public:
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float MaxDegreesPerSecond = 10;
-	
+
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float MaxElevationDegrees = 40;
 
