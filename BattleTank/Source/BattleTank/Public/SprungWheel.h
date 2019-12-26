@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "PhysicsEngine/PhysicsConstraintComponent.h"
+#include "Components/SphereComponent.h"
 #include "SprungWheel.generated.h"
 
 UCLASS()
@@ -19,18 +20,25 @@ public:
 	// Called every frame
 	auto Tick(float DeltaTime) -> void override;
 
+	auto AddDrivingForce(float ForceMagnitude) const -> void;
 
 protected:
 	// Called when the game starts or when spawned
 	auto BeginPlay() -> void override;
 
 private:
+	auto SetupConstraint() const -> void;
+	
+	// Components
 	UPROPERTY(VisibleAnywhere, Category = "Components")
-	UStaticMeshComponent* Mass = nullptr;
-
+	USphereComponent* Wheel = nullptr;
+	
 	UPROPERTY(VisibleAnywhere, Category = "Components")
-	UStaticMeshComponent* Wheel = nullptr;
-
+	USphereComponent* Axle = nullptr;
+	
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UPhysicsConstraintComponent* MassWheelConstraint = nullptr;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UPhysicsConstraintComponent* AxleWheelConstraint = nullptr;
 };

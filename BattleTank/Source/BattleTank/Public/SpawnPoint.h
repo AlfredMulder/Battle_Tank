@@ -20,12 +20,17 @@ public:
 	auto TickComponent(float DeltaTime, ELevelTick TickType,
 	                   FActorComponentTickFunction* ThisTickFunction) -> void override;
 
+	auto GetSpawnedActor() const -> AActor* { return SpawnedActor; }
+
 protected:
 	// Called when the game starts
 	auto BeginPlay() -> void override;
 
 private:
-
+	// Config
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AActor> SpawnClass;
+
+	UPROPERTY()
+	AActor* SpawnedActor;
 };
