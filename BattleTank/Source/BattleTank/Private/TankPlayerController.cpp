@@ -8,6 +8,7 @@
 auto ATankPlayerController::BeginPlay() -> void
 {
 	Super::BeginPlay();
+	if (!GetPawn()) { return; }
 	const auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) { return; }
 	FoundAimingComponent(AimingComponent);
