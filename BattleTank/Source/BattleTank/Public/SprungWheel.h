@@ -33,7 +33,7 @@ private:
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 	           FVector NormalImpulse, const FHitResult& Hit);
 
-	auto ApplyForce() const ->void;
+	auto ApplyForce() const -> void;
 
 	// Components
 	UPROPERTY(VisibleAnywhere, Category = "Components")
