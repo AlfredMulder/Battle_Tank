@@ -40,7 +40,7 @@ auto ASprungWheel::SetupConstraint() const -> void
 {
 	if (!GetAttachParentActor()) return;
 	const auto BodyRoot = Cast<UPrimitiveComponent>(GetAttachParentActor()->GetRootComponent());
-	if (!BodyRoot) return;
+	if (!BodyRoot) { return; }
 	MassWheelConstraint->SetConstrainedComponents(BodyRoot, NAME_None, Axle, NAME_None);
 	AxleWheelConstraint->SetConstrainedComponents(Axle, NAME_None, Wheel, NAME_None);
 }
